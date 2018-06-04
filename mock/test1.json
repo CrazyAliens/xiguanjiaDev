@@ -1,0 +1,32 @@
+{
+  "Result":{
+    "StoreStatus":5,
+    "StoreStatusText":"正常",
+    "ProductId":1423,
+    "ImageUrl":"http://www.e88u.com/Storage/master/product/thumbs160/160_201805282036025867220.jpg",
+    "Stock":1798,
+    "ActivityUrl":"",
+    "FightGroupActivityId":0,
+    "SkuItems":[],
+    "skus":[{
+      "SkuId":"1423_0",
+      "SKU":"SP0112100137",
+      "Weight":0.0000,
+      "Stock":1798,
+      "StoreStock":2000,
+      "SalePrice":7.80,
+      "StoreSalePrice":0.0,
+      "ImageUrl":""
+    }],
+    "DefaultSku":{
+      "SkuId":"1423_0",
+      "SKU":"SP0112100137",
+      "Weight":0.0000,
+      "Stock":1798,
+      "StoreStock":2000,
+      "SalePrice":7.80,
+      "StoreSalePrice":0.0,
+      "ImageUrl":""
+    }
+  }
+}
