@@ -40,6 +40,19 @@ function daojishi( day,el) {//倒计时 ,day是时间的字符串，el是jquery�
 //获取商品信息
 function getGoogsData(url) {
     var goods;
+    // var aaa = '{"Result":{"StoreStatus":5,"StoreStatusText":"正常","ProductId":1423,"ImageUrl":"http://www.e88u.com/Storage/master/product/thumbs160/160_201805282036025867220.jpg","Stock":1798,"ActivityUrl":"","FightGroupActivityId":0,"SkuItems":[{"AttributeId":"70","AttributeName":"检测/治理","AttributeValue":[{"ValueId":"429","Value":"CMA检测（1个点）","UseAttributeImage":"False","ImageUrl":""},{"ValueId":"307","Value":"治理（1平米）","UseAttributeImage":"False","ImageUrl":""}]}],"skus":[{"SkuId":"1423_0","SKU":"SP0112100137","Weight":0.0000,"Stock":1798,"StoreStock":2000,"SalePrice":7.80,"StoreSalePrice":0.0,"ImageUrl":""},{\n' +
+    //     '      "SkuId":"1186_429",\n' +
+    //     '      "SKU":"JZR03",\n' +
+    //     '      "Weight":0.0000,\n' +
+    //     '      "Stock":200,\n' +
+    //     '      "StoreStock":200,\n' +
+    //     '      "SalePrice":300.00,\n' +
+    //     '      "StoreSalePrice":0.0,\n' +
+    //     '      "ImageUrl":""\n' +
+    //     '    }],"DefaultSku":{"SkuId":"1423_0","SKU":"SP0112100137","Weight":0.0000,"Stock":1798,"StoreStock":2000,"SalePrice":7.80,"StoreSalePrice":0.0,"ImageUrl":""}}}';
+    // goods = JSON.parse(aaa);
+    //alert(goods.Result.SkuItems[0].AttributeId);
+    // return goods.Result;
     $.ajax({
         url:url,
         async:false,
@@ -70,6 +83,8 @@ function skuItemsList(el,data) {
         //     infoTop.appendTo(items)//挂载到主节点
 
         $.each(data.SkuItems[0].AttributeValue,function (key,val) {
+            console.log(key)
+            console.log(data.skus)
             var infoBottom=$("<div class='goodsinfo-bottom'></div>");
             $("<span class='g-name'></span>")//创建规格的名字节点
                 .text(val.Value)//设置规格的名字节点
@@ -79,7 +94,7 @@ function skuItemsList(el,data) {
                 .text("￥"+data.skus[key].SalePrice)
                 .appendTo(infoBottom);
 
-            $(" <div class='goods-tool'><i class='iconfont icon-jian-copy'></i><span class='car-num'></span><i class='iconfont icon-jia'  ></i>\</div>")//创建右边工具栏节点
+            $(" <div class='goods-tool'><i class='iconfont icon-jian-copy'></i><span class='car-num'></span><i class='iconfont icon-jia'></i>\</div>")//创建右边工具栏节点
                 .attr("productid",data.ProductId,"ValueId",val.ValueId)
                 .appendTo(infoBottom)
 
@@ -113,8 +128,8 @@ function skuItemsList(el,data) {
             num.math(1)//数量-1
 
             if(num.count<=0){
-                num.num.text("");
-                $(this).parent().parent().hide()
+                num.num.text(0);
+                $(this).hide();
             }
 
             $(this).parent().parent().parent().find(".goodsinfo-bottom")
@@ -123,7 +138,7 @@ function skuItemsList(el,data) {
                 })
 
             if(goodstype<=0){
-                $(this).hide()
+                 $(this).hide()
                 $(this).parent().parent().parent().hide();
                 el.show()
             }
@@ -183,7 +198,8 @@ function AddShoppingCar() {
         var num=getNum($(this))
         $(this).siblings(".icon-jian-copy").show();
         //查询商品信息
-        var goods =getGoogsData("./mock/test1.json")
+        var goods =getGoogsData("./mock/test.json")
+        console.log(goods)
         if(goods.SkuItems.length>0 ){//判断商品规格数量大于0弹出规格
             $(this).parent().hide()
             skuItemsList($(this).parent(),goods)
