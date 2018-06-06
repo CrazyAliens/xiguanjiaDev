@@ -63,7 +63,7 @@ function getGoogsData(url) {
     return goods;
 }
 //弹出规格窗口
-function skuItemsList(el,data) {
+function skuItemsList(modal,el,data) {
     var items=el.parent().parent().find("div.goods-size");
     if (items.length>0){//判断规格窗口是否存在
         items.show();
@@ -71,16 +71,16 @@ function skuItemsList(el,data) {
     }
     else {
         //c创建节点
-        var  items=$("<div class='goods-size'></div>");
-        // infoTop=$("<div class='goodsinfo-top'><i class='iconfont .icon-guanbi'></i></div>")
-        // imgTop=$("<img class='goods-img'>").attr('src',data.ImageUrl),
+        var  items=$("<div class='goods-size'></div>"),
+            infoTop=$("<div class='goodsinfo-top'><i class='iconfont .icon-guanbi'></i></div>"),
+            imgTop=$("<img class='goods-img'>").attr('src',data.ImageUrl);
         // priceTop=$("<span class='goods-price'></span>").text("￥"+data.DefaultSku.SalePrice)
         // infoTop.on("click",function () {
         //     items.hide()
         // })
-        // imgTop.appendTo(infoTop)//挂载图片节点
+        imgTop.appendTo(infoTop)//挂载图片节点
         // priceTop.appendTo(infoTop)//挂载价格节点
-        //     infoTop.appendTo(items)//挂载到主节点
+        infoTop.appendTo(items)//挂载到主节点
 
         $.each(data.SkuItems[0].AttributeValue,function (key,val) {
             console.log(key)
@@ -101,7 +101,7 @@ function skuItemsList(el,data) {
             infoBottom.appendTo(items)//挂载到主节点
         })
 
-        items.appendTo(el.parent().parent())//挂载到商品规格的根节点
+        items.appendTo(modal)//挂载到商品规格的根节点
 
         var addBtn = $(".goods-tool").find(".icon-jia"),
             subBtn =$(".goods-tool").find(".icon-jian-copy");
@@ -110,7 +110,7 @@ function skuItemsList(el,data) {
         addBtn.on("click",function () {
             var num=getNum($(this));
 
-            $(this).siblings(".icon-jian-copy").show();
+            // $(this).siblings(".icon-jian-copy").show();
 
             //查询商品信息
             num.math(2)//数量+1
@@ -122,26 +122,26 @@ function skuItemsList(el,data) {
 
         //规格的-按钮事件
         subBtn.on("click",function () {
-            var num=getNum($(this)),
-                goodstype=0;
+            var num=getNum($(this));
+                // goodstype=0;
 
             num.math(1)//数量-1
 
             if(num.count<=0){
                 num.num.text(0);
-                $(this).hide();
+                // $(this).hide();
             }
 
-            $(this).parent().parent().parent().find(".goodsinfo-bottom")
-                .each(function () {
-                    parseInt($(this).find(".car-num").text())>0?goodstype++:true;
-                })
-
-            if(goodstype<=0){
-                 $(this).hide()
-                $(this).parent().parent().parent().hide();
-                el.show()
-            }
+            // $(this).parent().parent().parent().find(".goodsinfo-bottom")
+            //     .each(function () {
+            //         parseInt($(this).find(".car-num").text())>0?goodstype++:true;
+            //     })
+            //
+            // if(goodstype<=0){
+            //      $(this).hide()
+            //     $(this).parent().parent().parent().hide();
+            //     el.show()
+            // }
 
             shopCarTotal(el.find(".car-num"),items.find(".goods-tool"))//计算该商品总数
 
@@ -196,15 +196,19 @@ function AddShoppingCar() {
 
     addBtn.on("click",function () {
         var num=getNum($(this))
-        $(this).siblings(".icon-jian-copy").show();
         //查询商品信息
         var goods =getGoogsData("./mock/test.json")
         console.log(goods)
         if(goods.SkuItems.length>0 ){//判断商品规格数量大于0弹出规格
-            $(this).parent().hide()
-            skuItemsList($(this).parent(),goods)
+            // $(this).parent().hide()
+            // skuItemsList($(this).parent(),goods)
+            $('#goodsModal').modal('show')
+            skuItemsList($('#goodsModal .modal-body'),$(this).parent(),goods)
         }
-        num.math(2)//数量+1
+        else {
+            num.math(2)//数量+1
+            $(this).siblings(".icon-jian-copy").show();
+        }
         shopCarTotal($("#circle"),$(".item-tool"))//计算购物车的总数
         // AddToCart(this);
     })
@@ -224,7 +228,9 @@ function AddShoppingCar() {
 
     })
 }
-
+$('#goodsModal').on('hidden.bs.modal', function (e) {//模态框隐藏时出发的事件
+    $('#goodsModal .modal-body .goods-size').remove()
+})
 //加载swiper插件
 +(function () {
     var SwiperSm = new Swiper ('#swiper-sm', {direction: 'vertical',});

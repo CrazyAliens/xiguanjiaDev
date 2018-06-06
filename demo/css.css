@@ -1397,3 +1397,29 @@ to {
 	background-color: #d20816;
 	color: white;
 }
+/*模态框*/
+#goodsModal .modal-dialog{
+    position: absolute;
+    width: 100%;
+    bottom: 0;
+    margin: 0;
+
+}
+#goodsModal .modal-content{
+    margin: 0;
+    width: 100%;
+}
+#goodsModal .modal-content h5{
+    text-align: center;
+}
+/*#goodsModal .modal-content h5 .close-btn{*/
+    /*display: inline-block;*/
+    /*position: relative;*/
+    /*right: 0;*/
+    /*border-radius: 100%;*/
+    /*border: 1px solid #ccc;*/
+    /*text-align: center;*/
+    /*width: .8rem;*/
+    /*height: .8rem;*/
+    /*line-height: .8rem;*/
+/*}*/

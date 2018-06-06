@@ -301,6 +301,10 @@
             #noTip3 .content i, #noTip3 .content i a {color: #ff5720;}
             fieldset legend{ padding:2px; max-width:90%;  background: #fff; }
         </style>
+        <link rel="stylesheet" href="css/bootstrap.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <!--<script src="https://cdn.bootcss.com/jquery/3.2.1/jquery.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+        <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     </head>
     <body style="">
         <script>
@@ -673,6 +677,29 @@
             </div>
 
         </div>
+            <div class="modal" tabindex="-1" role="dialog" id="goodsModal">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">
+                                产品规格
+                                <!--<div type="button" class="close-btn" data-dismiss="modal" aria-label="Close">-->
+                                    <!--<span aria-hidden="true">&times;</span>-->
+                                <!--</div>-->
+                            </h5>
+
+                        </div>
+                        <div class="modal-body">
+                            <!--<p>Modal body text goes here.</p>-->
+
+                        </div>
+                        <!--<div class="modal-footer">-->
+                            <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+                            <!--<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>-->
+                        <!--</div>-->
+                    </div>
+                </div>
+            </div>
         <a id="load" style="line-height:2rem; z-index:10; float:left; text-align:center;bottom:0;left:0;background:#fff;color:#999;width:100%;">加载更多商品...</a>
         <div id="divProductMore" style="text-align: center; padding: 0.125rem 0.375rem; display: none;" onclick="loadFloorData()">没有更多商品了</div>
     </div>
@@ -1150,5 +1177,6 @@
             if (r != null) return unescape(r[2]); return null;
         }
     </script>
+
     <script src="js/index.js"></script>
 </html>

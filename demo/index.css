@@ -11595,20 +11595,21 @@ border-radius: 100%;
     font-size: 0.4rem;
 }
 .category2 dd div.item-tool,
-.category2 dd div.goods-tool{
+.goods-tool{
     display: inline-flex;
     float: right;
     text-align: right;
 }
-.category2 dd div.goods-tool{
+.goods-tool{
     padding-top: .1rem;
 }
-.category2 dd div .car-num{
+.category2 dd div .car-num,
+.goods-tool .car-num {
     margin: 0;
     padding: 0;
     display: inline-block;
     width:2.2rem;
-    line-height: 20px;
+    line-height:.8rem;
     text-align: center;
     border: none;
 }
@@ -11624,9 +11625,25 @@ border-radius: 100%;
     display: none;
     color: #888;
 }
-
-.category2  dd .goods-size .g-name,
-.category2  dd .goods-size .g-price{
+.goods-size:after,
+.goodsinfo-bottom:after,
+.goodsinfo-top:after{
+    content: "";
+    display: block;
+    overflow: hidden;
+    clear: both;
+    zoom: 1;
+}
+.goodsinfo-bottom{
+    margin: .4rem;
+}
+.goods-size .goods-img{
+    width: 4rem;
+    height: 4rem;
+    float: left;
+}
+.goods-size .g-name,
+.goods-size .g-price{
     display: inline-block;
     text-align: left;
 }
